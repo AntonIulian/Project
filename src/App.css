@@ -12,8 +12,14 @@
   color: #5938a5;
 
 }
+
 body {
   height: 100vh;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* NAV */
@@ -48,6 +54,9 @@ body {
 .nav__container--left {
   display: flex;
   align-items: center;
+}
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+  color: white !important;
 }
 
 .nav__flag {
@@ -162,7 +171,10 @@ height: 2px;
 .customers__card--option:hover:after {
 width: 100%;
 }
-
+.align {
+  display: flex;
+  align-items: center;
+}
 .customers__card--search {
 margin-left: 12px;
 display: flex;
@@ -219,20 +231,10 @@ align-items: center;
   margin-right: 48px;
 }
 
-/* USER */
 
-.user__wrapper {
-  display: flex;
-  align-items: center;
-}
-.user__box {
-  width: calc(100% / 4);
-  display: flex;
-  align-items: center;
-  margin: 12px 0;
-}
-.user__star {
-  margin: 0px 12px;
+/* USER */
+.display {
+  width: calc(100%/4);
 }
 
 
@@ -282,32 +284,19 @@ align-items: center;
 }
 
 /* Footer */
-
 .footer__wrapper {
-  height: 100px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 0px 64px;
-  margin-bottom: 16px;
-
-}
-.footer__wrapper--right {
-  display: flex;
-  align-items: center;
-  margin-left: 12px;
-}
-.footer__item {
-  margin: 0px 12px
-  
+  align-items: flex-end;
 }
 
 /* RESPONSIVE */
 
 @media (max-width:1400px) {
-  .date {
-    display: none;
-  }
+ .date {
+  display: none !important;
+ }
+
   .user__box {
     width: calc(100%/3);
   }
@@ -315,15 +304,21 @@ align-items: center;
     width: calc(100%/3);
 
   }
+  .display {
+    width: calc(100%/3);
+  }
+ 
 }
 
 @media (max-width: 1024px) {
-  .phone {
-    display: none;
+ .email {
+  display: none !important;
+ }
+
+  .display {
+    width: calc(100%/2);
   }
-  .email {
-    margin-left: 32px;
-  }
+  
   .user__box {
     width: calc(100%/2);
   }
@@ -346,9 +341,14 @@ align-items: center;
   }
 }
 @media (max-width: 650px) {
-  .email {
-    display: none;
+  .phone {
+    display: none !important;
   }
+ 
+.display {
+  width: calc(100%);
+}
+
   .user__box {
     width: calc(100%);
   }

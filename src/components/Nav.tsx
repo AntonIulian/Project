@@ -2,6 +2,12 @@ import React from "react";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 
 function Nav() {
   return (
@@ -31,11 +37,20 @@ function Nav() {
           </div>
         </div>
         <div className="nav__wrapper--right">
-          <select className="nav__select" name="" id="">
-            <option value="ACME LTD" selected disabled>
-              Acme LTD.
-            </option>
-          </select>
+         <Box sx={{minWidth: 200, marginLeft: '24px'}}>
+          <FormControl  variant='standard' fullWidth>
+            <InputLabel sx={{color:'white'}}>
+            Acme LTD.
+            </InputLabel>
+            <Select disableUnderline sx={{outline:'none', borderBottom:'2px solid white'}}>
+            <MenuItem>Person 1</MenuItem>
+          <MenuItem >Person 2</MenuItem>
+          <MenuItem >Person 3</MenuItem>
+
+            </Select>
+
+          </FormControl>
+         </Box>
         </div>
       </div>
       <div className="nav__container--right">

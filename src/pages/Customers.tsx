@@ -5,7 +5,12 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import UserList from "../data/users.json";
 import User from "../components/User";
 import Error from "../components/UI/Error";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import Button from "@mui/material/Button";
+import Footer from "../components/Footer";
 
 export default function Customers() {
   type CustomersProps = {
@@ -18,11 +23,11 @@ export default function Customers() {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState<CustomersProps[]>([]);
   const [error, setError] = useState(false);
-  const [loading ,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   function filterSearch(e: React.FormEvent<HTMLFormElement> | null) {
     e?.preventDefault();
-    setLoading(true)
+    setLoading(true);
     setError(false);
     let filter = UserList.filter((user) =>
       user.name.toLowerCase().includes(search.toLowerCase())
@@ -31,20 +36,23 @@ export default function Customers() {
       setError(true);
     }
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 300);
-    setFiltered(filter);     
+    setFiltered(filter);
   }
-
-
 
   return (
     <div className="customers__container">
-<SideBar></SideBar>
+      <SideBar></SideBar>
       <div className="customers__wrapper">
         <div className="customers__nav">
           <h1 className="customers__header">Customers</h1>
-          <button className="customers__btn">+ Add</button>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#5938a5", padding: "12px" }}
+          >
+            + Add
+          </Button>
         </div>
 
         <div className="customers__card">
@@ -58,41 +66,46 @@ export default function Customers() {
               className="customers__form"
               onSubmit={(e) => filterSearch(e)}
               action=""
-              >
+            >
               <input
                 className="customers__input"
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
               />
-              <SearchIcon onClick={(e) => filterSearch(null)}  className="input__icon"></SearchIcon>
-
+              <SearchIcon
+                onClick={(e) => filterSearch(null)}
+                className="input__icon"
+              ></SearchIcon>
             </form>
             <SettingsIcon className="settings__icon purple nocursor"></SettingsIcon>
             <p className="settings__para purple nocursor">Filter</p>
           </div>
           <div className="customers__card--users">
-            <div className="customers__users--info">
-              <CheckBoxOutlineBlankIcon className="customers__info--icon nocursor"></CheckBoxOutlineBlankIcon>
-              <p className="customers__info--para">NAME</p>
-              <p className="customers__info--para phone">PHONE</p>
-              <p className="customers__info--para email">EMAIL</p>
-
-              <p className="customers__info--para date">CREATE AT</p>
-            </div>
-            { 
-            error === false ? (
+            <TableRow sx={{ display: "flex", alignItems: "center" }}>
+              <TableCell sx={{ padding: "12px" }}>
+                <CheckBoxOutlineBlankIcon className="customers__info--icon nocursor"></CheckBoxOutlineBlankIcon>
+              </TableCell>
+              <TableCell className="display name">Name</TableCell>
+              <TableCell className="display phone">Phone</TableCell>
+              <TableCell className="display email">Email</TableCell>
+              <TableCell className="display date">Create At</TableCell>
+            </TableRow>
+            {error === false ? (
               filtered.length < 1 ? (
-                UserList.map((user) => <User loading={loading} {...user}></User>)
-                ) : (
-                  filtered.map((user) => <User loading={loading} {...user}></User>)
-                  )
-                  ) : (
-                    <Error></Error>
-                    ) 
-                  }
+                UserList.map((user) => (
+                  <User loading={loading} {...user}></User>
+                ))
+              ) : (
+                filtered.map((user) => (
+                  <User loading={loading} {...user}></User>
+                ))
+              )
+            ) : (
+              <Error></Error>
+            )}
           </div>
         </div>
       </div>
-                  </div>
+    </div>
   );
 }
